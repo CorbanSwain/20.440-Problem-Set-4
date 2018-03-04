@@ -1,0 +1,19 @@
+Protein 1: G I G V D D V I K L
+Protein 2: Q L G P K D R L S I
+Protein 3: G L G V F D A I S L
+Protein 4: Q L G I N D Q I S M
+Protein 5: G I G K Q N E V S L
+
+
+prots = [['G', 'I', 'G', 'V', 'D', 'D', 'V', 'I', 'K', 'L'],
+         ['Q', 'L', 'G', 'P', 'K', 'D', 'R', 'L', 'S', 'I'],
+         ['G', 'L', 'G', 'V', 'F', 'D', 'A', 'I', 'S', 'L'],
+         ['Q', 'L', 'G', 'I', 'N', 'D', 'Q', 'I', 'S', 'M'],
+         ['G', 'I', 'G', 'K', 'Q', 'N', 'E', 'V', 'S', 'L']]
+
+aa_freq_dict = {'A' : 0.073, 'C' : 0.025, 'D' : 0.050, 'E' : 0.061,
+                'F' : 0.042, 'G' : 0.072, 'H' : 0.023, 'I' : 0.053,
+	        'K' : 0.064, 'L' : 0.089, 'M' : 0.023, 'N' : 0.043,
+	        'P' : 0.052, 'Q' : 0.040, 'R' : 0.052, 'S' : 0.073,
+	        'T' : 0.056, 'V' : 0.063, 'W' : 0.013, 'Y' : 0.033}
+		
