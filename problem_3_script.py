@@ -1,5 +1,5 @@
 #!/Library/Frameworks/Python.framework/Versions/3.6/bin/python3
-# problem_3_sctipt.py
+# problem_3_script.py
 # Corban Swain, March 2018
 
 # importing required packages
@@ -30,7 +30,7 @@ q_dict = {'A' : 0.073, 'C' : 0.025, 'D' : 0.050, 'E' : 0.061,
 	  'T' : 0.056, 'V' : 0.063, 'W' : 0.013, 'Y' : 0.033}
 
 # list of amino acids
-aas = aa_freq_dict.keys()
+aas = q_dict.keys()
 
 
 
@@ -146,6 +146,7 @@ pp.pprint(entropy_out)
 
 
 ## Part 5 ##
+# function for calulating the atatistical coupling energy
 def coupling_E(seqs, aa1, pos1, aa2, pos2):
     # number of protein sequences
     M = len(seqs)
