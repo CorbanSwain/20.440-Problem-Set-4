@@ -52,7 +52,7 @@ for pos in positions:
     # appending the dict to the ouput cache
     freqs_out.append(temp_dict)
 
-# Printing the calulated output
+# printing the calulated output
 print('\nPart 1: AA Frequencies')        
 pp.pprint(freqs_out)
 
@@ -79,6 +79,7 @@ def p_observed(aa, freq):
     temp_3 = (1 - q) ** noncounts
     return temp_1 * temp_2 * temp_3
 
+# relative entropy calulation
 def rel_entropy(aa, freq):
     nonfreq = 1 - freq
     q = q_dict[aa]
@@ -92,20 +93,27 @@ def p_observed_approx(aa, freq):
     D = rel_entropy(aa, freq)
     return exp(-M * D)
 
-# looping through each position
+# initializing ouput caches
 p_obsv_out = []
 entropy_out = []
+
+# looping through each position
 for obsv_freqs in freqs_out:
+    # adding a new empty  dictionary to each output cache
     p_obsv_out.append({})
     entropy_out.append({})
+
+    # looping through each aa present
     for aa, freq in obsv_freqs.items():
+        # calulating probability of observing each aa it its
+        # present frequency
         p_obsv_out[-1][aa] = p_observed(aa, freq)
+
+        # calulating the relative entropy assosiated wit
+        # observing each aa at its present frequency
         entropy_out[-1][aa] = rel_entropy(aa, freq)
         
-
-    
-
-# Printing the calulated output
+# printing the calulated output
 print('\nPart 2: Probabilities of Observation')        
 pp.pprint(p_obsv_out)
 print('\nPart 3: Relative Entropy for Observation')        
