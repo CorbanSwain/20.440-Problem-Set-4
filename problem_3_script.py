@@ -22,7 +22,7 @@ prots = np.array(prots)
 # number of sequences
 M = len(prots)
 
-# amino acid backgroud frequencies
+# amino acid (aa) backgroud frequencies
 q_dict = {'A' : 0.073, 'C' : 0.025, 'D' : 0.050, 'E' : 0.061,
           'F' : 0.042, 'G' : 0.072, 'H' : 0.023, 'I' : 0.053,
 	  'K' : 0.064, 'L' : 0.089, 'M' : 0.023, 'N' : 0.043,
@@ -35,6 +35,8 @@ aas = q_dict.keys()
 
 
 ## Part 1 ##
+# function for counting the frequency of aas at a given position
+# in a multiple sequence alignment (MSA)
 def aa_freqs(seqs, pos):
     # number of sequences
     M = len(seqs)
@@ -146,7 +148,7 @@ pp.pprint(entropy_out)
 
 
 ## Part 5 ##
-# function for calulating the atatistical coupling energy
+# function for calulating the statistical coupling energy
 def coupling_E(seqs, aa1, pos1, aa2, pos2):
     # number of protein sequences
     M = len(seqs)
