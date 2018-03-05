@@ -4,7 +4,6 @@
 
 # importing required packages
 import numpy as np
-import pprint as pp
 
 
 
@@ -70,10 +69,17 @@ for pos in positions:
     # in the MSA
     freqs_out.append(aa_freqs(prots, pos))
 
+# function for pretty printing (pp) the dictionary lists
+# used throughout this script
+def pp_dict_list(dict_list):
+    for iPos, d in enumerate(dict_list):
+        print('  Position %d:' % (positions[iPos] + 1))
+        for key, val in d.items():
+            print('    {:s} - {:6.4f}'.format(key, val))
 
 # printing the calulated output
-print('\nPart 1: AA Frequencies')        
-pp.pprint(freqs_out)
+print('\nPart 1: AA Frequencies')
+pp_dict_list(freqs_out)           
 
 
 
@@ -134,9 +140,9 @@ for obsv_freqs in freqs_out:
         
 # printing the calulated output
 print('\nPart 2: Probabilities of Observation')        
-pp.pprint(p_obsv_out)
+pp_dict_list(p_obsv_out)
 print('\nPart 3: Relative Entropy for Observation')        
-pp.pprint(entropy_out)
+pp_dict_list(entropy_out)
 
 
 
@@ -173,4 +179,4 @@ ddG = coupling_E(prots, 'G', 0, 'L', 9)
 
 # printing the calculated output
 print('\nPart 5: Statistical Coupling Energy')        
-print('\Delta\DeltaG = %f' % ddG)
+print('  \Delta\DeltaG = %f' % ddG)
