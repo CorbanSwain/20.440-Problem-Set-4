@@ -147,10 +147,12 @@ pp_dict_list(entropy_out)
 
 
 ## Part 4 ##
-# A relative entropy of zero represents the case when an amino acid
-# at a given position in the multiple sequence alighment appears with
-# frequency equivalent to the backgroud frequency for that amino acid.
-
+print('\nPart 4: Meaning of relative Entropy')        
+print('''
+  A relative entropy of zero represents the case when an amino acid
+  at a given position in the multiple sequence alighment appears with
+  frequency equivalent to the backgroud frequency for that amino acid.
+''')
 
 
 ## Part 5 ##
