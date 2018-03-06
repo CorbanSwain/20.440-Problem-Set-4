@@ -89,8 +89,6 @@ fact = np.math.factorial
 ln = np.math.log
 exp = np.math.exp
 
-# precalulate to save comp. time
-M_fact = fact(M)
 
 # functions for calulating the probabaluty of observing a given
 # amino acid at a specific frequency withing a set of aligned
@@ -100,7 +98,7 @@ def p_observed(aa, freq, M):
     counts = round(M * freq)
     noncounts = M - counts
     q = q_dict[aa]
-    temp_1 = M_fact / (fact(counts) * fact(noncounts))
+    temp_1 = fact(M) / (fact(counts) * fact(noncounts))
     temp_2 = q ** counts
     temp_3 = (1 - q) ** noncounts
     return temp_1 * temp_2 * temp_3
@@ -163,7 +161,7 @@ def coupling_E(seqs, aa1, pos1, aa2, pos2):
     
     # frequency of aa2 at pos2 in the MSA
     freq = aa_freqs(seqs, pos2).get(aa2, 0.0)
-
+    
     # subset of the sequences with aa1 at pos1
     enriched_seqs = [s for s in seqs if s[pos1] == aa1]
     enriched_seqs = np.array(enriched_seqs)
@@ -173,7 +171,7 @@ def coupling_E(seqs, aa1, pos1, aa2, pos2):
 
     # calculating the statistical coupling energy
     temp1 = ln(p_observed(aa2, freq, M))
-    temp2 = ln(p_observed(aa2, coupled_freq, len(enriched_seqs)))
+    temp2 = ln(p_observed(aa2, coupled_freq, len(enriched_seqs)))    
     return -1.0 / M * (temp1 - temp2)
 
 # performing the calculation for the spcified inputs
