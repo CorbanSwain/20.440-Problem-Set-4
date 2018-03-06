@@ -124,7 +124,7 @@ entropy_out = []
 
 # looping through each position
 for obsv_freqs in freqs_out:
-    # adding a new empty  dictionary to each output cache
+    # adding a new empty dictionary to each output cache
     p_obsv_out.append({})
     entropy_out.append({})
 
@@ -147,7 +147,7 @@ pp_dict_list(entropy_out)
 
 
 ## Part 4 ##
-print('\nPart 4: Meaning of relative Entropy')        
+print('\nPart 4: Meaning of Relative Entropy')        
 print('''
   A relative entropy of zero represents the case when an amino acid
   at a given position in the multiple sequence alighment appears with
@@ -174,7 +174,7 @@ def coupling_E(seqs, aa1, pos1, aa2, pos2):
     # calculating the statistical coupling energy
     temp1 = ln(p_observed(aa2, freq, M))
     temp2 = ln(p_observed(aa2, coupled_freq, len(enriched_seqs)))
-    return - 1.0 / M * (temp1 - temp2)
+    return -1.0 / M * (temp1 - temp2)
 
 # performing the calculation for the spcified inputs
 ddG = coupling_E(prots, 'G', 0, 'L', 9)
