@@ -4,7 +4,6 @@
 
 # importing required packages
 import numpy as np
-import pprint as pp
 
 
 
@@ -70,10 +69,17 @@ for pos in positions:
     # in the MSA
     freqs_out.append(aa_freqs(prots, pos))
 
+# function for pretty printing (pp) the dictionary lists
+# used throughout this script
+def pp_dict_list(dict_list):
+    for iPos, d in enumerate(dict_list):
+        print('  Position %d:' % (positions[iPos] + 1))
+        for key, val in d.items():
+            print('    {:s} - {:6.4f}'.format(key, val))
 
 # printing the calulated output
-print('\nPart 1: AA Frequencies')        
-pp.pprint(freqs_out)
+print('\nPart 1: AA Frequencies')
+pp_dict_list(freqs_out)           
 
 
 
@@ -83,8 +89,6 @@ fact = np.math.factorial
 ln = np.math.log
 exp = np.math.exp
 
-# precalulate to save comp. time
-M_fact = fact(M)
 
 # functions for calulating the probabaluty of observing a given
 # amino acid at a specific frequency withing a set of aligned
@@ -94,7 +98,7 @@ def p_observed(aa, freq, M):
     counts = round(M * freq)
     noncounts = M - counts
     q = q_dict[aa]
-    temp_1 = M_fact / (fact(counts) * fact(noncounts))
+    temp_1 = fact(M) / (fact(counts) * fact(noncounts))
     temp_2 = q ** counts
     temp_3 = (1 - q) ** noncounts
     return temp_1 * temp_2 * temp_3
@@ -118,7 +122,7 @@ entropy_out = []
 
 # looping through each position
 for obsv_freqs in freqs_out:
-    # adding a new empty  dictionary to each output cache
+    # adding a new empty dictionary to each output cache
     p_obsv_out.append({})
     entropy_out.append({})
 
@@ -134,17 +138,19 @@ for obsv_freqs in freqs_out:
         
 # printing the calulated output
 print('\nPart 2: Probabilities of Observation')        
-pp.pprint(p_obsv_out)
+pp_dict_list(p_obsv_out)
 print('\nPart 3: Relative Entropy for Observation')        
-pp.pprint(entropy_out)
+pp_dict_list(entropy_out)
 
 
 
 ## Part 4 ##
-# A relative entropy of zero represents the case when an amino acid
-# at a given position in the multiple sequence alighment appears with
-# frequency equivalent to the backgroud frequency for that amino acid.
-
+print('\nPart 4: Meaning of Relative Entropy')        
+print('''
+  A relative entropy of zero represents the case when an amino acid
+  at a given position in the multiple sequence alighment appears with
+  frequency equivalent to the backgroud frequency for that amino acid.
+''')
 
 
 ## Part 5 ##
@@ -155,7 +161,7 @@ def coupling_E(seqs, aa1, pos1, aa2, pos2):
     
     # frequency of aa2 at pos2 in the MSA
     freq = aa_freqs(seqs, pos2).get(aa2, 0.0)
-
+    
     # subset of the sequences with aa1 at pos1
     enriched_seqs = [s for s in seqs if s[pos1] == aa1]
     enriched_seqs = np.array(enriched_seqs)
@@ -165,12 +171,12 @@ def coupling_E(seqs, aa1, pos1, aa2, pos2):
 
     # calculating the statistical coupling energy
     temp1 = ln(p_observed(aa2, freq, M))
-    temp2 = ln(p_observed(aa2, coupled_freq, len(enriched_seqs)))
-    return - 1.0 / M * (temp1 - temp2)
+    temp2 = ln(p_observed(aa2, coupled_freq, len(enriched_seqs)))    
+    return -1.0 / M * (temp1 - temp2)
 
 # performing the calculation for the spcified inputs
 ddG = coupling_E(prots, 'G', 0, 'L', 9)
 
 # printing the calculated output
 print('\nPart 5: Statistical Coupling Energy')        
-print('\Delta\DeltaG = %f' % ddG)
+print('  \Delta\DeltaG = %f' % ddG)
