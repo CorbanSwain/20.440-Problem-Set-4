@@ -1,5 +1,11 @@
+#/bin/python
+# structure_views.py
+# Corban Swain, March 2018
+
 import pymol
 
+# ABL1 Seq  NLFVALYDFVASGDNTLSITKGEKLRVLGYNHNGEWCEAQTKNGQGWVPSNYITPVN
+#           :::::::::::::::::::::::::::::::::::::::::::::::::::::::::               
 prot_seq = 'NLFVALYDFVASGDNTLSITKGEKLRVLGYNHNGEWCEAQTKNGQGWVPSNYITPVN'
 #           123456789012345678901234567890123456789012345678901234567
 #           0        1         2         3         4         5
@@ -13,6 +19,7 @@ views = [(-0.361983389,    0.388416916,   -0.847408175,
 
 debug_mode = False;
 blocks = [(4, 11), (16, 28), (35, 39), (44, 53)]
+blocks = [(4, 11), (16, 17), (22, 28), (36, 39) , (44, 53)]
 fully_conserved = [17, 22, 36, 46, 49]
 prot_sel = '(c. A)'
 ligand_sel = '(c. B)'
@@ -29,6 +36,7 @@ def setup():
     cmd.set('surface_quality',2)
     cmd.set('surface_cavity_mode', 2)
     cmd.set('cavity_cull', 150)
+    cmd.h_add()
 
 def hide_all():
     cmd.hide('everything', '*')
@@ -37,7 +45,8 @@ def color_blocks():
     hide_all()
     main_color = 'cyan'
     ligand_color = 'gray90'
-    color_list = ['red', 'forest', 'orange', 'magenta']
+    color_list = ['red', 'orange', 'yellow', 'forest',
+                  'blue']
     cmd.color(main_color, prot_sel)
     cmd.color(ligand_color, ligand_sel)
     cmd.show('cartoon', prot_sel)
@@ -55,6 +64,9 @@ def show_consv():
         if prot_seq[resi - 1] == 'P':
             cmd.show('stick', '%s & i. %d & n. N'  % (prot_sel, resi))
 
+def show_Y():
+    cmd.show('stick', '%s & i. 4 & !(n. C+O+N) & !(e. H)' % ligand_sel)
+            
 def show_view(num):
     cmd.set_view(views[num])
         
@@ -70,3 +82,9 @@ def save_im(name):
     cmd.png('protein_figure_' + name);
     print('Saving Done')
     
+def main():
+    setup()
+    color_blocks()
+    show_consv()
+    show_Y()
+    show_view(0)
