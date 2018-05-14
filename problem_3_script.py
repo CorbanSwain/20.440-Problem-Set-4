@@ -89,7 +89,6 @@ fact = np.math.factorial
 ln = np.math.log
 exp = np.math.exp
 
-
 # functions for calulating the probabaluty of observing a given
 # amino acid at a specific frequency withing a set of aligned
 # sequences. Formulated according to Ranganathan Lab - Note 109:
